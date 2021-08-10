@@ -1,0 +1,101 @@
+{% extends 'net/initial_template.html' %}
+
+{% block title %}
+bem vindo de volta!
+{% endblock %}
+
+{% block content %}
+<form method="post">
+
+  <div class="mb-3">
+        {% csrf_token %}
+         <input type="text" class="form-control" placeholder="nome de utilizador" name="inputUsername">
+    </div>
+
+  <div class="mb-3">
+        {% csrf_token %}
+         <input type="password" class="form-control" placeholder="password" name="inputPassword">
+    </div>
+
+  {% if error_message %}
+  <div class="text-center" id="error">
+    <svg style="color:#d14949" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+      <path
+        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+    </svg>
+    <label style="color:#d14949">{{ error_message }}</label>
+  </div>
+  {% endif %}
+  <br>
+  <button id="login_btn"
+    class="btn col-12 mx-auto btn-lg btn-success btn-block text-uppercase font-weight-bold mb-2"
+    type="submit">entrar
+  </button>
+</form>
+<br>
+<!-- Button trigger modal -->
+<div class="text-center">
+  <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal"
+    data-bs-target="#signup_modal">
+    ainda não tenho conta!
+  </button>
+</div>
+{% endblock %}
+
+{% block modal %}
+<div class="modal fade" id="signup_modal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div class="container-fluid">
+          <div class="row">
+            <h5 class="card-title" id="staticBackdropLabel"><br>queres criar conta em que tipo de perfil?</h5>
+            <br><br><br><br>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="card text-dark bg-light mb-3 text-center">
+                <div class="card-body">
+                  <strong>Profissionais de Saúde</strong><br><br>
+                  <p class="card-text">Uma plataforma que facilita a comunicação entre médicos,
+                    enfermeiros
+                    e
+                    auxiliares de saúde em alturas de máxima exigência.</p><br>
+                  <div class="d-grid gap-2">
+                    <a href="{% url 'net:health_professional_signup' %}" class="btn btn-success">criar conta</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card text-dark bg-light mb-3 text-center">
+                <div class="card-body">
+                  <strong>Instituições de Saúde</strong><br><br>
+                  <p class="card-text">A mais útil e prática maneira dos hospitais e centros de saúde terem intereção
+                    com os
+                    seus médicos, enfermeiros e auxiliares de saúde.</p><br>
+                  <div class="d-grid gap-2">
+                    <a href="{% url 'net:health_institution_signup' %}" class="btn btn-success">criar conta</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  var myModal = document.getElementById('myModal')
+  var myInput = document.getElementById('myInput')
+
+  myModal.addEventListener('shown.bs.modal', function () {
+    myInput.focus()
+  })
+</script>
+{% endblock %}

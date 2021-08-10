@@ -1,0 +1,56 @@
+{% extends "net/signup_general.html" %}
+
+{% block title %}
+registar profissional de saúde
+{% endblock %}
+
+{% block name %}
+<div class="mb-3">
+    {% csrf_token %}
+    <input type="text" class="form-control" placeholder="nome próprio" name="inputFirstName">
+</div>
+
+<div class="mb-3">
+    {% csrf_token %}
+    <input type="text" class="form-control" placeholder="apelido" name="inputLastName">
+</div>
+
+{% endblock %}
+
+{% block gender %}
+
+<div>
+    {% csrf_token %}
+    <select class="form-select" name="gender">
+        <option selected>género</option>
+        <option value="male">Masculino</option>
+        <option value="female">Feminino</option>
+    </select>
+</div>
+<br>
+{% endblock %}
+
+{% block type %}
+<div>
+    {% csrf_token %}
+    <select class="form-select" name="type">
+        <option selected>tipo de profissional</option>
+        <option value="Medico">Médico</option>
+        <option value="Enfermeiro">Enfermeiro</option>
+        <option value="Aux">Auxiliar de Saúde</option>
+    </select>
+</div>
+{% endblock %}
+
+{% block work %}
+<div>
+    {% csrf_token %}
+    <select class="form-select" name="work">
+        <option selected>onde trabalha</option>
+        <option value="null">Instituição não registada</option>
+        {% for inst in institutions %}
+        <option value="{{ inst.id }}">{{ inst.user.first_name }}</option>
+        {% endfor %}
+    </select>
+</div><br>
+{% endblock %}

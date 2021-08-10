@@ -1,0 +1,16 @@
+{% extends 'net/initial_template.html' %}
+
+{% block title %}
+algo correu mal!
+{% endblock %}
+
+{% block content %}
+
+<div class="text-center">
+    <h2 class="login-heading mb-4">a página que estás a tentar encontrar já não está disponível</h2>
+
+    <br><a href="{% url 'net:feed' %}" class="btn btn-success btn-sm card-body">
+      Ir para o meu feed</a><br>
+</div>
+
+{% endblock %}

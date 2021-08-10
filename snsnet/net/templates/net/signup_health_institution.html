@@ -1,0 +1,30 @@
+{% extends "net/signup_general.html" %}
+
+{% block title %}
+    registar instituição de saúde
+{% endblock %}
+
+{% block name %}
+    <div class="mb-3">
+        {% csrf_token %}
+        <input type="text" class="form-control" placeholder="nome" name="inputName">
+    </div>
+{% endblock %}
+
+{% block type %}
+    <div>
+        {% csrf_token %}
+        <select class="form-select" name="type">
+            <option selected>tipo de instituição</option>
+            <option value="Hospital">Hospital</option>
+            <option value="Centro de Saúde">Centro de saúde</option>
+        </select>
+    </div>
+{% endblock %}
+
+{% block address %}
+    <div class="mb-3">
+        {% csrf_token %}
+         <input type="text" class="form-control" placeholder="morada" name="inputAddress">
+    </div>
+{% endblock %}

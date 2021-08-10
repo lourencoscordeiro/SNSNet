@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Confirmation</title>
+</head>
+<body>
+
+<h4><strong>A tua conta está quase pronta, <span style="color:#198754;">{{ user.username }}</span>!</strong></h4><br>
+    <h5>Clica no <a href="{{ link }}">link</a> em baixo para confirmares a tua conta.</h5><br>
+<h5>Este <a href="{{ link }}">link</a> expira às {{ expiry|time:"TIME_FORMAT" }} Depois dessa hora ser-ta-á dada a opurtunidade de receber outro link.</h5>
+
+</body>
+</html>

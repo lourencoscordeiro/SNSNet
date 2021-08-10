@@ -1,0 +1,152 @@
+#post_author {
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+#logout_svg {
+    margin-left: 7px;
+}
+
+.bg-dark {
+    background-color: #05643c!important;
+}
+
+.btn-primary {
+    background-color: #05643c;
+    border-color: #05643c;
+}
+
+.btn-secondary {
+    background-color: #05643c;
+    border-color: #05643c;
+}
+
+.work {
+    text-align: center;
+}
+
+.post::placeholder {
+    font-weight: 300;
+}
+.post {
+    padding-left: 0.8rem;
+}
+
+.post {
+    margin-top: 5px;
+}
+
+.card-header:last-child {
+    border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
+}
+
+.card-header {
+    color: #6c757d;
+    font-size: 14px;
+    line-height: 160%;
+}
+
+.post {
+    margin: 15px!important;
+}
+
+.post-time {
+    font-size: 14px;
+    color: #6c757d;
+    margin: 1rem;
+}
+
+.mb-4 {
+    margin-top: 24px;
+}
+
+.nav-item {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.form-control {
+    margin-bottom: 15px!important;
+}
+
+.publish-label {
+    margin-left: 20px;
+}
+
+#name, #district, #contacts, #username {
+    text-align: center;
+}
+
+#like-button, #dislike-button {
+    color: #05643c;
+}
+
+#author-name {
+    color: #000000!important;
+    font-size: 17px!important;
+    margin-left: 5px;
+}
+
+#destine-name {
+    color: #000000!important;
+}
+
+#author-name:hover, #destine-name:hover {
+    color: #05643c;
+}
+
+#navbar-perfil {
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+#profile-pic {
+    margin-left: 80px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+#district {
+    margin-bottom: 20px;
+}
+
+#email {
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+#phone {
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+#follow-submit {
+    background-color: #05643c;
+    border: 0px;
+    width: 250px;
+    height: 35px;
+    margin-left: 50px!important;
+    color: #ffffff;
+    resize: none;
+    border-radius: 6px;
+}
+
+#follow {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ffffff;
+    background-color: #05643c;
+    border-radius: 6px;
+    width: 250px;
+    height: 25px;
+    margin-left: 50px;
+}
+
+#follow:hover {
+  text-decoration: none;
+}
+
+#logout {
+    margin-top: 5px;
+}

@@ -1,0 +1,106 @@
+{% extends 'net/initial_template.html' %}
+
+{% block content %}
+
+{% if error_message %}
+<div class="text-center" id="error">
+    <svg style="color:#d14949" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+        <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+    </svg>
+    <label style="color:#d14949">{{ error_message }}</label>
+</div>
+{% endif %}
+
+<br>
+
+<form method="post">
+
+    {% block name %}{% endblock %}
+
+    <div class="mb-3">
+        {% csrf_token %}
+         <input type="text" class="form-control" placeholder="nome de utilizador" name="inputUsername">
+    </div>
+
+    <div class="mb-3">
+        {% csrf_token %}
+         <input type="email" class="form-control" placeholder="email" name="inputEmail">
+    </div>
+
+    <div class="mb-3">
+        {% csrf_token %}
+         <input type="number" class="form-control" placeholder="telemovel" name="inputPhone">
+    </div>
+
+    {% block gender %}{% endblock %}
+
+    {% block address %}{% endblock %}
+
+    <div>
+        {% csrf_token %}
+        <select class="form-select" name="district">
+            <option selected>distrito</option>
+            <option value="Lisboa">Lisboa</option>
+            <option value="Porto">Porto</option>
+            <option value="Braga">Braga</option>
+            <option value="Setubal">Setubal</option>
+            <option value="Aveiro">Aveiro</option>
+            <option value="Faro">Faro</option>
+            <option value="Leiria">Leiria</option>
+            <option value="Coimbra">Santarém</option>
+            <option value="Madeira">Madeira</option>
+            <option value="Acores">Açores</option>
+            <option value="Viana do Castelo">Viana Do Castelo</option>
+            <option value="Vila Real">Vila Real</option>
+            <option value="Castelo Branco">Castelo Branco</option>
+            <option value="Evora">Évora</option>
+            <option value="Guarda">Guarda</option>
+            <option value="Beja">Beja</option>
+            <option value="Bragança">Bragança</option>
+            <option value="Portalegre">Portalegre</option>
+        </select>
+    </div><br>
+
+    <hr> <br>
+
+    {% block type %}{% endblock %}
+
+    <br>
+
+    {% block work %}{% endblock %}
+
+    <hr>
+
+    <br>
+
+    <div class="mb-3">
+        {% csrf_token %}
+         <input type="password" class="form-control" placeholder="password" name="inputPassword">
+    </div>
+
+    <div class="mb-3">
+        {% csrf_token %}
+         <input type="password" class="form-control" placeholder="confirmar password" name="inputPasswordConfirmation">
+    </div>
+
+    <br>
+
+    <div class="text-center">
+        <button class="btn col-12 mx-auto btn-success btn-block text-uppercase font-weight-bold mb-2"
+            type="submit">criar conta
+        </button><br><br>
+    </div>
+</form>
+<div class="text-center">
+    <a href="{% url 'net:login_account' %}" role="button" class="btn btn-secondary btn-sm">já tenho conta
+        criada</a>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="../../static/net/js/jquery.slim.js"></script>
+<script src="../../static/net/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

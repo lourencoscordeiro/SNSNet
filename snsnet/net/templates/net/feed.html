@@ -1,0 +1,244 @@
+{% extends "net/header.html" %}
+
+{% block page_name %}
+{{ visited.user.first_name }} {{ visited.user.last_name }}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-8">
+
+      {% if institution %}
+
+      <div class="card my-4 border-success">
+        <h5 id="post-header" class="card-header">Novo post</h5>
+        <form method="post" class="card-body" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {% if no_title %}
+          <div>
+            <svg style="color:#d14949" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+            </svg>
+            <label style="color:#d14949">{{ no_title }}</label>
+          </div><br>
+          {% endif %}
+
+          <input type="number" placeholder="contagem de hoje" name="cases" class="form-control new_post">
+
+          {% if invalid_image %}
+          <div>
+            <svg style="color:#d14949" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+            </svg>
+            <label style="color:#d14949">{{ invalid_image }}</label>
+          </div><br>
+          {% endif %}
+
+          <input type="submit" value="Publicar" class="btn btn-success btn-block font-weight-bold ">
+        </form>
+      </div>
+
+      {% elif professional %}
+
+      <div class="card my-4 border-success">
+        <h5 class="card-header">Novo post</h5>
+        <form method="post" class="card-body" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {% if no_title %}
+          <div>
+            <svg style="color:#d14949" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+            </svg>
+            <label style="color:#d14949">{{ no_title }}</label>
+          </div><br>
+          {% endif %}
+
+          <input placeholder="título do post" name="title" class="form-control new_post" id="new_post_title">
+          <textarea rows="3" cols="92" name="content" class="form-control new_post"
+            placeholder="conteúdo do post"></textarea>
+          <label for="img">Imagem (opcional)</label><br><br>
+          <input type="file" class="form-control" name="image" id="img">
+
+          {% if invalid_image %}
+          <div>
+            <svg style="color:#d14949" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+            </svg>
+            <label style="color:#d14949">{{ invalid_image }}</label>
+          </div><br>
+          {% endif %}
+
+          <input id="post-submit" type="submit" value="Publicar" class="btn btn-success btn-block font-weight-bold ">
+        </form>
+      </div>
+
+      {% endif %}
+
+      {% if posts %}
+      {% for post, author, liked in posts %}
+
+      <div class="card mb-4 border-success">
+        <div class="card-header text-muted">
+
+          {% if author.photo %}
+          <img src="{{ author.photo.url }}" class="rounded-circle" width="35" height="35">
+          {% else %}
+          <img src="{% static 'net/assets/img/perfil.png' %}" class="rounded-circle" width="35" height="35">
+          {% endif %}
+
+          <a href="{% url 'net:account' post.user.username %}" id="post_author" class="text-success">
+            <strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong> </a> <br>
+
+
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ post.title }}</h4>
+          <p class="card-text">{{ post.content }}</p>
+          {% if post.image %}
+          <img src="{{ post.image.url }}" width="600"><br>
+          {% endif %}
+          <br>
+          <h10 class="text-secondary">{{ post.time }}</h10>
+        </div>
+
+        <div class="card-footer text-muted">
+          <div class="container">
+            <div class="row">
+              <div class="col-10">
+                <button class="btn" id="like{{ post.id }}" name="{{ post.id }}" style="display: inline-block;">
+
+                  <svg id="like_true{{ post.id }}" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" style="display:none">
+                    <path fill-rule="evenodd"
+                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                  </svg>
+
+                  <svg id="like_false{{ post.id }}" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" style="display:none">
+                    <path
+                      d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                  </svg>
+
+                </button>
+
+                <label id="like_count{{ post.id }}">
+                  {{ post.likes }} likes
+                </label>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+
+      <script type="text/javascript">
+
+        function validate_like(liked, id) {
+          if (liked == "False") {
+            document.getElementById("like_true".concat(id)).style.display = "none";
+            document.getElementById("like_false".concat(id)).style.display = "block";
+          } else {
+            document.getElementById("like_true".concat(id)).style.display = "block";
+            document.getElementById("like_false".concat(id)).style.display = "none";
+          }
+        }
+
+        $(document).ready(function () {
+
+          $("#like{{ post.id }}").click(function () {
+            $.ajax({
+              url: "{% url 'net:like' %}",
+              type: 'GET',
+              data: {
+                post_id: $(this)[0].getAttribute("name")
+              },
+              success: function (response) {
+                validate_like(response.liked, "{{ post.id }}")
+                $("#like_count{{ post.id }}").text(response.likes + ' likes')
+              }
+            })
+          })
+        })
+
+        var liked = "{{ liked }}";
+        var id = "{{ post.id }}";
+        validate_like(liked, id);
+      </script>
+
+      {% endfor %}
+      {% else %}
+
+      <div class="card my-4 text-center">
+        <br>
+        <h4 style="color: grey;">Parece que ainda não há posts por aqui</h4>
+        <br>
+
+      </div>
+
+      {% endif %}
+
+    </div>
+
+    <div class="col-md-4">
+
+      <!-- Search Widget -->
+
+      <div class="card my-4 border-success">
+
+        <form class="card-header" autocomplete="off">
+          <input id="search" name="username" type="text" class="form-control" placeholder="pesquisar usuarios"
+            aria-label="Username">
+        </form>
+        <div id="search_result" class="card-body">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#search').keyup(function () {
+      var txt = $(this).val();
+
+      if (txt == '') {
+        $('#search_result').html('');
+      } else {
+        $.ajax({
+          url: "{% url 'net:search' %}",
+          data: {
+            search: txt
+          },
+          success: function (data) {
+            $('#search_result').html(data.res);
+          }
+        });
+
+      }
+    });
+  });
+</script>
+
+{% endblock %}
