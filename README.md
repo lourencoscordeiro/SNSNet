@@ -4,7 +4,7 @@ A facebook-alike web platform that is to be used by health professionals and hea
 
 The web application is build in python with the web framework django. 
 
-1. Dependencies:
+Dependencies:
 
 1.1 Django installation
 
@@ -28,9 +28,8 @@ python binary used by Django-cloudinary-storage to handle media files
 
     run 'pip install pillow'
     
-    
-2. Run project:
+Run project:
 
-  run 'python manage.py runserver'
+        run 'python manage.py runserver'
 
   
