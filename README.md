@@ -30,6 +30,6 @@ python binary used by Django-cloudinary-storage to handle media files
     
 Run project:
 
-        run 'python manage.py runserver'
+    run 'python manage.py runserver'
 
   
